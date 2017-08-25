@@ -20,17 +20,17 @@ def logItem(barcode):
     config_json.close()
     
 #logItem(3000)
+if __name__ == '__main__':
+    config_json = open("config.json")
+    config = json.load(config_json)
 
-config_json = open("config.json")
-config = json.load(config_json)
+    url = config['url']
+    message = "HEY. What's up?"
+    payload = {'message':message }
 
-url = config['url']
-message = "HEY. What's up?"
-payload = {'message':message }
+    r = requests.post(url, data=payload)
 
-r = requests.post(url, data=payload)
+    print r.text
 
-print r.text
-
-config_json.close()
+    config_json.close()
 
