@@ -2,7 +2,8 @@
 
 echo "Hello, World";
 
-echo $_POST["TrolleyNo"];
-echo $_POST["barcode"];
+error_log($_POST['message']);
+
+echo "\n";
 echo "DONE";
 ?>

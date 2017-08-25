@@ -19,4 +19,18 @@ def logItem(barcode):
     
     config_json.close()
     
-logItem(3000)
+#logItem(3000)
+
+config_json = open("config.json")
+config = json.load(config_json)
+
+url = config['url']
+message = "HEY. What's up?"
+payload = {'message':message }
+
+r = requests.post(url, data=payload)
+
+print r.text
+
+config_json.close()
+
