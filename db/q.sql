@@ -29,7 +29,7 @@ CREATE TABLE Transactions (
     TrolleyNo int ,
     Paid int DEFAULT 0,
     
-    UNIQUE KEY (Tid,Iid),
+    UNIQUE KEY (Tid,Iid,TrolleyNo),
     FOREIGN KEY (Iid) REFERENCES Items(Id),
     FOREIGN KEY (TrolleyNo) REFERENCES Trolleys(TrolleyNo)
 );

@@ -1,0 +1,34 @@
+<html>
+     <head>
+         <title>Thing</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+         
+    </head> 
+    <body>
+        Hello, Jason
+        Tester
+        <script>
+            function logitem(barcode, trolley_no) {
+                $.post("http://localhost/daniel/logitem.php",
+                      {'TrolleyNo': trolley_no , 'barcode': barcode },
+                      function(data) {
+                    console.log(data);
+                });
+            }
+            function getbill(trolley_no) {
+                $.post("http://localhost/daniel/getbill.php",
+                      {'TrolleyNo': trolley_no },
+                      function(data) {
+                    console.log(data);
+                });
+            }
+            function clearbill(trolley_no) {
+                $.post("http://localhost/daniel/clearbill.php",
+                      {'TrolleyNo': trolley_no },
+                      function(data) {
+                    console.log(data);
+                });
+            }
+        </script>
+    </body>
+</html>

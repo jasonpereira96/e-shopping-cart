@@ -1,11 +1,11 @@
 <?php
 require("conn_manager.php");
 //log an item
-//$trolley_no = $_POST["TrolleyNo"];
-//$barcode = $_POST["barcode"];
+$trolley_no = $_POST["TrolleyNo"];
+$barcode = $_POST["barcode"];
 
-$trolley_no = 1;
-$barcode = 'k002';
+//$trolley_no = 1;
+//$barcode = 'k002';
 
 
 $conn = connect();
@@ -28,16 +28,19 @@ We can improve this!
 */
 //log the item to Transactions
 //first check if its already there, then only increase qty
-$query = "SELECT * FROM `transactions` where Iid = " . $itemId . " and TrolleyNo = ". $trolley_no ." ;";
+$query = "SELECT * FROM `transactions` where Iid = " . $itemId . " and TrolleyNo = ". $trolley_no ." and paid = 0;";
 $result = mysqli_query($conn, $query);
 $exists = mysqli_num_rows($result) > 0;
-
-if ($exists) {
+//echo mysqli_num_rows($result);
+//echo "Exists: " . $exists;
+//echo '\n';
+//echo $query;
+if (mysqli_num_rows($result) > 0) {
     //to check
     /*
     SELECT * FROM `transactions` where Iid = (select Id from Items where barcode = 'k002') and TrolleyNo = 1;
     */
-    $query = "update transactions set qty = qty + 1 where TrolleyNo = " . $trolley_no . " and Iid = " . $itemId . " ;";
+    $query = "update transactions set qty = qty + 1 where TrolleyNo = " . $trolley_no . " and Iid = " . $itemId . " and paid = 0;";
     $result = mysqli_query($conn, $query);
     //to increase qty
     /*
@@ -49,8 +52,14 @@ if ($exists) {
             "VALUES " . 
             "(NULL, ?, ?, 1, ?, 0);"
     );
-    $stmt->bind_param("iii", $Tid, $itemId, $trolley_no);
-    $stmt->execute();
+    
+    if (!$stmt->bind_param("iii", $Tid, $itemId, $trolley_no)){
+        error_log("binding failed" . $stmt->error);
+    }
+    if (!$stmt->execute()) {
+        error_log("insert failed" . $stmt->error);
+    }
+    
     $stmt->close();
 }
 mysqli_close($conn);

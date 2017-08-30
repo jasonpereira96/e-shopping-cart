@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2017 at 06:44 AM
+-- Generation Time: Aug 30, 2017 at 05:41 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -37,15 +37,18 @@ CREATE TABLE IF NOT EXISTS `items` (
   `Barcode` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Barcode` (`Barcode`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`Id`, `IName`, `Des`, `Cost`, `Barcode`) VALUES
-(1, 'Soap', 'Lux Soap', 100, 'k001'),
-(2, 'Maggi', 'Noodles', 20, 'k002');
+(1, 'My Soap', 'Lux Soap', 40, 'k001'),
+(2, 'Maggi', 'Noodles', 20, 'k002'),
+(3, 'Bread', 'White Bread', 35, 'k003'),
+(4, 'Tropicana', 'Orange Juice', 20, 'k004'),
+(6, 'Oreo', 'Chocolate Biscuit', 60, 'k005');
 
 -- --------------------------------------------------------
 
@@ -62,18 +65,24 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `TrolleyNo` int(11) DEFAULT NULL,
   `Paid` int(11) DEFAULT '0',
   PRIMARY KEY (`Id`),
-  UNIQUE KEY `Trans_Item` (`Tid`,`Iid`),
+  UNIQUE KEY `My_Uni_Key` (`Iid`,`Tid`,`TrolleyNo`),
   KEY `Iid` (`Iid`),
   KEY `TrolleyNo` (`TrolleyNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transactions`
 --
 
 INSERT INTO `transactions` (`Id`, `Tid`, `Iid`, `qty`, `TrolleyNo`, `Paid`) VALUES
-(1, 100, 1, 1, 1, 0),
-(2, 100, 2, 1, 1, 0);
+(1, 100, 4, 3, 3, 0),
+(11, 100, 4, 2, 2, 0),
+(12, 102, 4, 2, 1, 1),
+(13, 103, 6, 1, 1, 1),
+(14, 103, 1, 3, 1, 1),
+(15, 103, 3, 1, 1, 1),
+(16, 103, 2, 1, 1, 1),
+(17, 104, 1, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -93,7 +102,9 @@ CREATE TABLE IF NOT EXISTS `trolleys` (
 --
 
 INSERT INTO `trolleys` (`TrolleyNo`, `Tid`) VALUES
-(1, 100);
+(1, 104),
+(2, 100),
+(3, 100);
 
 --
 -- Constraints for dumped tables

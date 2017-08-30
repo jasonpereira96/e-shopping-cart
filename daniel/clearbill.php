@@ -3,8 +3,8 @@ require("conn_manager.php");
 
 //clear the bill
 
-//$trolley_no = $_POST["TrolleyNo"];
-$trolley_no = 1;
+$trolley_no = $_POST["TrolleyNo"];
+//$trolley_no = 1;
 
 $conn = connect();
 
