@@ -7,23 +7,26 @@
     <body>
         Hello, Jason
         Tester
+        This is a page for tesing the backend.
+        Sugeeeeeeeee!
         <script>
+            var ip = "localhost";
             function logitem(barcode, trolley_no) {
-                $.post("http://localhost/daniel/logitem.php",
+                $.post("http://" + ip + "/daniel/logitem.php",
                       {'TrolleyNo': trolley_no , 'barcode': barcode },
                       function(data) {
                     console.log(data);
                 });
             }
             function getbill(trolley_no) {
-                $.post("http://localhost/daniel/getbill.php",
+                $.post("http://" + ip + "/daniel/getbill.php",
                       {'TrolleyNo': trolley_no },
                       function(data) {
                     console.log(data);
                 });
             }
             function clearbill(trolley_no) {
-                $.post("http://localhost/daniel/clearbill.php",
+                $.post("http://"  + ip + "/daniel/clearbill.php",
                       {'TrolleyNo': trolley_no },
                       function(data) {
                     console.log(data);
